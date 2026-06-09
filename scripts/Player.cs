@@ -65,7 +65,6 @@ public partial class Player : CharacterBody2D
 			anim.Play("jump");
 		}
 
-
 		Velocity = velocity;
 		MoveAndSlide();
 	}
