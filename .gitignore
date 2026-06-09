@@ -1,3 +1,25 @@
-# Godot 4+ specific ignores
+# Cache e arquivos gerados pelo Godot 4
 .godot/
-/android/
+
+# Configurações de exportação (podem conter senhas/chaves locais)
+export.cfg
+export_presets.cfg
+
+# Compilação C# / .NET
+bin/
+obj/
+*.csproj.user
+
+# Mono (Para retrocompatibilidade ou arquivos de log de crash)
+.mono/
+data_*/
+mono_crash.*.json
+
+# Arquivos temporários de editores e IDEs (Visual Studio, Rider, VSCode)
+.vs/
+.idea/
+*.suo
+.vscode/
+
+# Arquivos do Sistema Operacional
+.DS_Store
