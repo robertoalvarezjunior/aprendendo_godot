@@ -1,5 +1,6 @@
 # Cache e arquivos gerados pelo Godot 4
 .godot/
+.vscode/
 
 # Configurações de exportação (podem conter senhas/chaves locais)
 export.cfg
@@ -19,7 +20,7 @@ mono_crash.*.json
 .vs/
 .idea/
 *.suo
-.vscode/
+
 
 # Arquivos do Sistema Operacional
 .DS_Store
