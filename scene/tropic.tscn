@@ -1,0 +1,116 @@
+[gd_scene format=4 uid="uid://pgcfgoussmun"]
+
+[ext_resource type="PackedScene" uid="uid://cgoi08lwdh6b7" path="res://entities/player.tscn" id="1_bmxgx"]
+[ext_resource type="PackedScene" uid="uid://dac6vcp81h6jp" path="res://entities/camera_2d.tscn" id="2_7xb8y"]
+[ext_resource type="TileSet" uid="uid://c1ue44bb3wulq" path="res://tiles/grass.tres" id="2_ry6l7"]
+[ext_resource type="Texture2D" uid="uid://uexfgsmf22w5" path="res://sprites/Seasonal Tilesets/3 - Tropics/Background parts/5 - Sky_color.png" id="3_ry6l7"]
+[ext_resource type="Texture2D" uid="uid://ceogleshtv6ar" path="res://sprites/Seasonal Tilesets/3 - Tropics/Background parts/4 - Background_clouds.png" id="4_17pmc"]
+[ext_resource type="Texture2D" uid="uid://cnbkvkx2ke6t8" path="res://sprites/Seasonal Tilesets/3 - Tropics/Background parts/3 - Floating_clouds.png" id="5_7xb8y"]
+[ext_resource type="Texture2D" uid="uid://bs4tuws7np6te" path="res://sprites/Seasonal Tilesets/3 - Tropics/Background parts/2 - Waters_version_2.png" id="6_34ia6"]
+[ext_resource type="Texture2D" uid="uid://cqa1ps31e2uos" path="res://sprites/Seasonal Tilesets/3 - Tropics/Background parts/1 - Waters_version_1.png" id="7_d18o5"]
+[ext_resource type="PackedScene" uid="uid://2h40dp8yfaqg" path="res://entities/level_end.tscn" id="9_34ia6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t8vtq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_34ia6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_d18o5")
+}],
+"loop": true,
+"name": &"agua",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_34ia6"]
+size = Vector2(20, 62)
+
+[node name="Tropic" type="Node2D" unique_id=2035973261]
+metadata/_edit_vertical_guides_ = [660.0]
+
+[node name="Player" parent="." unique_id=1527985871 groups=["Player"] instance=ExtResource("1_bmxgx")]
+position = Vector2(584, 169)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=503417080]
+tile_map_data = PackedByteArray("AAAAAAwABQACAAMAAAABAAwABQACAAMAAAACAAwABQACAAMAAAADAAwABQACAAMAAAAEAAwABQACAAMAAAAFAAwABQACAAMAAAAGAAwABQACAAMAAAAHAAwABQACAAMAAAAIAAwABQACAAMAAAAJAAwABQACAAMAAAAKAAwABQACAAMAAAALAAwABQACAAMAAAAMAAwABQACAAMAAAANAAwABQACAAMAAAAOAAwABQACAAMAAAAPAAwABQACAAMAAAAQAAwABQACAAMAAAARAAwABQACAAMAAAASAAwABQACAAMAAAATAAwABQACAAMAAAAZAAwABQACAAMAAAAaAAwABQACAAMAAAAbAAwABQACAAMAAAAcAAwABQACAAMAAAAdAAwABQACAAMAAAAeAAwABQACAAMAAAAfAAwABQACAAMAAAAgAAwABQACAAMAAAAhAAwABQACAAMAAAAiAAwABQACAAMAAAAjAAwABQACAAMAAAAkAAwABQACAAMAAAAlAAwABQACAAMAAAAmAAwABQACAAMAAAAnAAwABQACAAMAAAAoAAwABQACAAMAAAApAAwABQACAAMAAAAqAAwABQACAAMAAAArAAwABQACAAMAAAAsAAwABQACAAMAAAAtAAwABQACAAMAAAAuAAwABQACAAMAAAAvAAwABQACAAMAAAAwAAwABQACAAMAAAAxAAwABQACAAMAAAAyAAwABQACAAMAAAAzAAwABQACAAMAAAA0AAwABQACAAMAAAA1AAwABQACAAMAAAA2AAwABQACAAMAAAA3AAwABQACAAMAAAAWAAsABQAPAAMAAAD//wwABQACAAMAAAD+/wwABQACAAMAAAD9/wwABQACAAMAAAD8/wwABQACAAMAAAD7/wwABQACAAMAAAD6/wwABQACAAMAAAD5/wwABQACAAMAAAD4/wwABQACAAMAAAD3/wwABQACAAMAAAD2/wwABQACAAMAAAD1/wwABQACAAMAAAD0/wwABQACAAMAAADz/wwABQACAAMAAADy/wwABQACAAMAAADx/wwABQACAAMAAADw/wwABQACAAMAAADv/wwABQACAAMAAADu/wwABQACAAMAAADt/wwABQACAAMAAADs/wwABQACAAMAAADr/wwABQACAAMAAADq/wwABQACAAMAAADp/wwABQACAAMAAADo/wwABQACAAMAAADn/wwABQACAAMAAADm/wwABQACAAMAAADl/wwABQACAAMAAADk/wwABQACAAMAAADj/wwABQACAAMAAAAMAAkABQAJAAMAAAANAAkABQAKAAMAAAAGAAYABQAJAAMAAAAHAAYABQAKAAMAAAAOAAkABQAMAAMAAAAPAAkABQANAAMAAAAIAAYABQAMAAMAAAAJAAYABQANAAMAAAAPAAMABQAJAAMAAAAQAAMABQAKAAMAAAARAAMABQALAAMAAAASAAMABQAMAAMAAAATAAMABQANAAMAAAAYAAEABQAJAAMAAAAZAAEABQAKAAMAAAAaAAEABQALAAMAAAAbAAEABQAMAAMAAAAcAAEABQANAAMAAAAiAAAABQAJAAMAAAAjAAAABQAKAAMAAAAkAAAABQALAAMAAAAlAAAABQAMAAMAAAAmAAAABQANAAMAAAAMAP7/BQAJAAMAAAANAP7/BQAKAAMAAAAOAP7/BQALAAMAAAAPAP7/BQAMAAMAAAAQAP7/BQANAAMAAAAXAPz/BQAJAAMAAAAYAPz/BQAKAAMAAAAZAPz/BQALAAMAAAAaAPz/BQAMAAMAAAAbAPz/BQANAAMAAAAGAAMABQAJAAMAAAAHAAMABQAKAAMAAAAIAAMABQALAAMAAAAJAAMABQAMAAMAAAAKAAMABQANAAMAAAAFAAAABQAJAAMAAAAGAAAABQAKAAMAAAAHAAAABQALAAMAAAAIAAAABQAMAAMAAAAJAAAABQANAAMAAAAQAPv/BQAJAAMAAAARAPv/BQAKAAMAAAASAPv/BQALAAMAAAATAPv/BQAMAAMAAAAUAPv/BQANAAMAAAAGAPz/BQAJAAMAAAAHAPz/BQAKAAMAAAAIAPz/BQALAAMAAAAJAPz/BQAMAAMAAAAKAPz/BQANAAMAAAADAPn/BQAJAAMAAAAEAPn/BQAKAAMAAAAFAPn/BQALAAMAAAAGAPn/BQAMAAMAAAAHAPn/BQANAAMAAAA=")
+tile_set = ExtResource("2_ry6l7")
+
+[node name="Decoration" type="TileMapLayer" parent="." unique_id=1396460740]
+tile_map_data = PackedByteArray("AAAQAAoABAABAAEAAAAeAAoABAABAAEAAAAiAAoABAABAAEAAAAKAAoABAABAAEAAAA=")
+tile_set = ExtResource("2_ry6l7")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1873684485]
+
+[node name="Parallax2D2" type="Parallax2D" parent="Node2D" unique_id=1357848226]
+scroll_scale = Vector2(0, 0)
+repeat_size = Vector2(288, 0)
+
+[node name="5" type="Sprite2D" parent="Node2D/Parallax2D2" unique_id=1217769679]
+texture = ExtResource("3_ry6l7")
+centered = false
+
+[node name="Parallax2D3" type="Parallax2D" parent="Node2D" unique_id=125661344]
+scroll_scale = Vector2(0.2, 0.1)
+repeat_size = Vector2(288, 0)
+
+[node name="4" type="Sprite2D" parent="Node2D/Parallax2D3" unique_id=99169480]
+texture_repeat = 2
+texture = ExtResource("4_17pmc")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 576, 208)
+
+[node name="Parallax2D4" type="Parallax2D" parent="Node2D" unique_id=479647080]
+scroll_scale = Vector2(0.1, 0.05)
+repeat_size = Vector2(288, 0)
+
+[node name="3" type="Sprite2D" parent="Node2D/Parallax2D4" unique_id=1454515746]
+texture_repeat = 2
+texture = ExtResource("5_7xb8y")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 576, 208)
+
+[node name="Node2D" type="Node2D" parent="Node2D" unique_id=553112225]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D/Node2D" unique_id=1226667904]
+texture_repeat = 2
+sprite_frames = SubResource("SpriteFrames_t8vtq")
+animation = &"agua"
+autoplay = "agua"
+centered = false
+offset = Vector2(0, 16)
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Node2D/Node2D" unique_id=425769680]
+texture_repeat = 2
+position = Vector2(288, 0)
+sprite_frames = SubResource("SpriteFrames_t8vtq")
+animation = &"agua"
+autoplay = "agua"
+centered = false
+offset = Vector2(0, 16)
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="Node2D/Node2D" unique_id=1423503747]
+texture_repeat = 2
+position = Vector2(576, 0)
+sprite_frames = SubResource("SpriteFrames_t8vtq")
+animation = &"agua"
+autoplay = "agua"
+centered = false
+offset = Vector2(0, 16)
+
+[node name="Camera2D" parent="." unique_id=1762008868 instance=ExtResource("2_7xb8y")]
+position = Vector2(-91, 133)
+limit_right = 660
+
+[node name="LevelEnd" parent="." unique_id=1512117574 instance=ExtResource("9_34ia6")]
+position = Vector2(665, 182)
+nextLevelScene = "forest"
+
+[node name="CollisionShape2D" parent="LevelEnd" index="0" unique_id=1295215311]
+position = Vector2(0, -21)
+shape = SubResource("RectangleShape2D_34ia6")
+
+[editable path="LevelEnd"]
