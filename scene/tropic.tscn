@@ -30,7 +30,7 @@ size = Vector2(20, 62)
 [node name="Tropic" type="Node2D" unique_id=2035973261]
 metadata/_edit_vertical_guides_ = [660.0]
 
-[node name="Player" parent="." unique_id=1527985871 groups=["Player"] instance=ExtResource("1_bmxgx")]
+[node name="Player" parent="." unique_id=1527985871 instance=ExtResource("1_bmxgx")]
 position = Vector2(584, 169)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=503417080]
