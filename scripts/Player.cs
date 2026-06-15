@@ -5,7 +5,8 @@ enum PlayerState
 {
 	Idle,
 	Walk,
-	Jump
+	Jump,
+	Duck
 }
 
 public partial class Player : CharacterBody2D
@@ -13,12 +14,21 @@ public partial class Player : CharacterBody2D
 	public const float Speed = 100.0f;
 	public const float JumpVelocity = -300.0f;
 	private AnimatedSprite2D anim;
+
+	private CollisionShape2D cs;
+
 	private PlayerState state;
 
 	private Vector2 velocity;
 
+	private float direction = 0;
+
+	int jumps = 0;
+	int maxJumps = 2;
+
 	public override void _Ready()
 	{
+		cs = GetNode<CollisionShape2D>("CollisionShape2D");
 		anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		GoIdle();
 	}
@@ -44,6 +54,9 @@ public partial class Player : CharacterBody2D
 			case PlayerState.Jump:
 				JumpState();
 				break;
+			case PlayerState.Duck:
+				DuckState();
+				break;
 		}
 
 		Velocity = velocity;
@@ -67,6 +80,21 @@ public partial class Player : CharacterBody2D
 		state = PlayerState.Jump;
 		anim.Play("jump");
 		velocity.Y = JumpVelocity;
+		jumps++;
+	}
+
+	private void GoDuck()
+	{
+		state = PlayerState.Duck;
+		anim.Play("duck");
+		cs.Shape = new CapsuleShape2D() { Radius = 8, Height = 10 };
+		cs.Position = new Vector2(0, 2.0f);
+	}
+
+	private void ExitDuck()
+	{
+		cs.Shape = new CapsuleShape2D() { Radius = 6, Height = 16 };
+		cs.Position = new Vector2(0, 0);
 	}
 
 	private void IdleState()
@@ -80,6 +108,12 @@ public partial class Player : CharacterBody2D
 		if (Input.IsActionJustPressed("up"))
 		{
 			GoJump();
+			return;
+		}
+
+		if (Input.IsActionJustPressed("down"))
+		{
+			GoDuck();
 			return;
 		}
 	}
@@ -104,8 +138,15 @@ public partial class Player : CharacterBody2D
 	{
 		Move();
 
+		if (Input.IsActionJustPressed("up") && jumps < maxJumps)
+		{
+			GoJump();
+			return;
+		}
+
 		if (IsOnFloor())
 		{
+			jumps = 0;
 			if (velocity.X == 0)
 			{
 				GoIdle();
@@ -119,10 +160,22 @@ public partial class Player : CharacterBody2D
 		}
 	}
 
+	private void DuckState()
+	{
+		UpdateDirection();
+
+		if (Input.IsActionJustReleased("down"))
+		{
+			ExitDuck();
+			GoIdle();
+			return;
+		}
+	}
+
 	private void Move()
 	{
 
-		float direction = Input.GetAxis("left", "right");
+		UpdateDirection();
 
 		if (direction != 0)
 		{
@@ -132,6 +185,12 @@ public partial class Player : CharacterBody2D
 		{
 			velocity.X = Mathf.MoveToward(velocity.X, 0, Speed);
 		}
+
+	}
+
+	private void UpdateDirection()
+	{
+		direction = Input.GetAxis("left", "right");
 
 		if (direction > 0)
 		{
