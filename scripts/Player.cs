@@ -6,7 +6,8 @@ enum PlayerState
 	Idle,
 	Walk,
 	Jump,
-	Duck
+	Duck,
+	Fall
 }
 
 public partial class Player : CharacterBody2D
@@ -41,6 +42,10 @@ public partial class Player : CharacterBody2D
 		if (!IsOnFloor())
 		{
 			velocity += GetGravity() * (float)delta;
+
+			if (velocity.Y > 0 && state != PlayerState.Fall)
+				jumps++;
+			GoFall();
 		}
 
 		switch (state)
@@ -57,12 +62,29 @@ public partial class Player : CharacterBody2D
 			case PlayerState.Duck:
 				DuckState();
 				break;
+			case PlayerState.Fall:
+				FallState();
+				break;
 		}
 
 		Velocity = velocity;
 		MoveAndSlide();
 	}
+	private void Move()
+	{
 
+		UpdateDirection();
+
+		if (direction != 0)
+		{
+			velocity.X = direction * Speed;
+		}
+		else
+		{
+			velocity.X = Mathf.MoveToward(velocity.X, 0, Speed);
+		}
+
+	}
 	private void GoIdle()
 	{
 		state = PlayerState.Idle;
@@ -91,6 +113,37 @@ public partial class Player : CharacterBody2D
 		cs.Position = new Vector2(0, 2.0f);
 	}
 
+	private void GoFall()
+	{
+		state = PlayerState.Fall;
+		anim.Play("fall");
+	}
+
+	private void FallState()
+	{
+		Move();
+
+		if (Input.IsActionJustPressed("up") && jumps < maxJumps)
+		{
+			GoJump();
+			return;
+		}
+
+		if (IsOnFloor())
+		{
+			jumps = 0;
+			if (velocity.X == 0)
+			{
+				GoIdle();
+				return;
+			}
+			else
+			{
+				GoWalk();
+				return;
+			}
+		}
+	}
 	private void ExitDuck()
 	{
 		cs.Shape = new CapsuleShape2D() { Radius = 6, Height = 16 };
@@ -144,19 +197,10 @@ public partial class Player : CharacterBody2D
 			return;
 		}
 
-		if (IsOnFloor())
+		if (velocity.Y > 0)
 		{
-			jumps = 0;
-			if (velocity.X == 0)
-			{
-				GoIdle();
-				return;
-			}
-			else
-			{
-				GoWalk();
-				return;
-			}
+			GoFall();
+			return;
 		}
 	}
 
@@ -172,21 +216,7 @@ public partial class Player : CharacterBody2D
 		}
 	}
 
-	private void Move()
-	{
 
-		UpdateDirection();
-
-		if (direction != 0)
-		{
-			velocity.X = direction * Speed;
-		}
-		else
-		{
-			velocity.X = Mathf.MoveToward(velocity.X, 0, Speed);
-		}
-
-	}
 
 	private void UpdateDirection()
 	{
